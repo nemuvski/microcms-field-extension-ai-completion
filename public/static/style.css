@@ -1,0 +1,205 @@
+:root {
+  --color-text: rgb(203 210 243);
+  --color-bg: rgb(41 43 60);
+  --color-layout-footer-bg: rgb(30 31 42);
+  --color-accent: rgb(187 158 242);
+  --color-scrollbar-bg: rgb(36 37 51);
+  --color-scrollbar-thumb: rgb(64 66 84);
+  --color-microcms-logo: rgb(255 255 255);
+
+  --size-controller-height: 1.75rem;
+
+  --zindex-depth-1: 10;
+  --zindex-depth-2: 20;
+}
+
+::-webkit-scrollbar {
+  width: 0.75rem;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-scrollbar-bg);
+  border-radius: 0;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-scrollbar-thumb);
+  border-radius: 0;
+}
+
+html {
+  font-size: 16px;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Noto Sans", Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  font-size: 1rem;
+  font-weight: normal;
+  letter-spacing: 0.02rem;
+}
+
+main {
+  margin-bottom: var(--size-header-height);
+}
+
+.visibility-hidden {
+  visibility: hidden;
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.layout {
+  display: grid;
+  grid-template-rows: auto var(--size-controller-height);
+  height: 100dvh;
+}
+.layout__main {
+  overflow-y: auto;
+  padding-block: 1rem;
+  padding-inline: 1.25rem;
+}
+.layout__footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  background: var(--color-layout-footer-bg);
+}
+.layout__footer-inner {
+  display: flex;
+}
+
+.toggle-switch {
+  display: flex;
+  aspect-ratio: 1.4;
+  cursor: pointer;
+  color: var(--color-accent);
+}
+.toggle-switch:hover {
+  background: var(--color-accent);
+  color: var(--color-layout-footer-bg);
+}
+.toggle-switch__icon {
+  pointer-events: none;
+  aspect-ratio: 1;
+  width: 1rem;
+  margin: auto;
+}
+
+.select-writing-mode {
+  position: relative;
+  display: flex;
+  align-items: stretch;
+  color: var(--color-accent);
+}
+.select-writing-mode[aria-disabled] {
+  opacity: 0.5;
+  cursor: default;
+}
+.select-writing-mode:not([aria-disabled]):hover {
+  background: var(--color-accent);
+  color: var(--color-layout-footer-bg);
+}
+.select-writing-mode__icon {
+  pointer-events: none;
+  position: absolute;
+  top: 50%;
+  left: 0.75rem;
+  transform: translateY(-50%);
+  aspect-ratio: 1;
+  width: 0.85rem;
+  cursor: pointer;
+}
+.select-writing-mode__select {
+  margin: 0;
+  padding-block: 0;
+  padding-inline-start: 1.85rem;
+  padding-inline-end: 0.75rem;
+  appearance: none;
+  background: none;
+  border: none;
+  font-family: inherit;
+  font-size: 0.75rem;
+  line-height: var(--size-controller-height);
+  color: inherit;
+  cursor: pointer;
+}
+.select-writing-mode__select:focus {
+  outline: none;
+}
+
+.completion-loader {
+  aspect-ratio: 1;
+  width: 1.25em;
+  margin-left: 0.35rem;
+  color: var(--color-accent);
+}
+
+.microcms-connection-status {
+  position: relative;
+  height: 100%;
+  font-size: 0.75rem;
+}
+.microcms-connection-status__main {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding-inline: 0.75rem;
+  height: 100%;
+  color: var(--color-microcms-logo);
+  cursor: help;
+}
+.microcms-connection-status__main[data-status="disconnected"] {
+  opacity: 0.5;
+}
+.microcms-connection-status__icon {
+  aspect-ratio: 1;
+  width: 1rem;
+}
+.microcms-connection-status__tooltip {
+  position: absolute;
+  z-index: var(--zindex-depth-1);
+  right: 0.75rem;
+  bottom: calc(100% + 0.5rem);
+  display: block;
+  width: 12rem;
+  padding: 0.5rem;
+  background: var(--color-layout-footer-bg);
+  word-break: break-all;
+  line-height: 1.5;
+}
+.microcms-connection-status__tooltip::before {
+  content: "";
+  position: absolute;
+  top: 100%;
+  right: 1rem;
+  margin-left: -0.4rem;
+  border-width: 0.4rem;
+  border-style: solid;
+  border-color: var(--color-layout-footer-bg) transparent transparent
+    transparent;
+}
+.microcms-connection-status__tooltip[aria-hidden] {
+  display: none;
+}
+
+.editor {
+  min-height: 100%;
+  line-height: 1.85;
+  caret-color: var(--color-accent);
+}
+.editor:focus {
+  outline: none;
+}
+.completion-text {
+  pointer-events: none;
+  user-select: none;
+  opacity: 0.8;
+}

@@ -1,0 +1,17 @@
+/**
+ * https://developers.cloudflare.com/workers/wrangler/configuration/
+ */
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  // CHANGEME: (必須) nameは自分のアプリケーション名に変更してください
+  "name": "＜書き換えて＞",
+  "compatibility_date": "2025-03-28",
+  "pages_build_output_dir": "./dist",
+  "compatibility_flags": ["nodejs_compat"],
+  "observability": {
+    "enabled": true
+  },
+  "ai": {
+    "binding": "AI"
+  }
+}
