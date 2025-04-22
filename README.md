@@ -26,3 +26,16 @@ npm ci
 ```bash
 npm run deploy
 ```
+
+## 構成
+
+- `src/client/`
+    - クライアントサイドで実行されるコード（エディタ機能）を格納
+- `src/api/`
+    - WebAPIのハンドラとWorkers AIにリクエストに関するコードを格納
+    - モデルやパラメータ、プロンプトについては `text-generation/` にあるコードをご覧ください
+- `src/shared/`
+    - クライアントサイドとサーバーサイドで共有されるコードを格納
+- `src/index.tsx`
+    - ページ、WebAPIのルートの登録
+    - CSPヘッダーの設定
