@@ -1,11 +1,4 @@
-import {
-  type CSSProperties,
-  type FC,
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from "hono/jsx";
+import { type FC, useCallback, useEffect, useRef } from "hono/jsx";
 import { isEmptyContent, isString } from "../../shared/string";
 import { useCompletion } from "./completion";
 import type { useMicroCMSFieldExtension } from "./microcms-field-extension";
