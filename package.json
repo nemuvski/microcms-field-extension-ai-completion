@@ -1,6 +1,11 @@
 {
-  "name": "ai-completion-editor",
+  "name": "microcms-field-extension-ai-completion",
   "type": "module",
+  "private": true,
+  "license": "MIT",
+  "author": "K.Utsunomiya",
+  "version": "1.0.0",
+  "description": "AI Completion Editor (optionally usable with microCMS)",
   "scripts": {
     "dev": "vite",
     "build": "vite build --mode client && vite build",
