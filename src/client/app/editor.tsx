@@ -167,20 +167,12 @@ const Editor: FC<Props> = ({ defaultValue, sendMessageToMicroCMS }) => {
         return;
       }
 
-      // IMEの変換中は、以降の処理は行わない
-      // 変換後の文字列は、compositionendイベントで処理される
-      if (e.isComposing) {
-        return;
+      if (!e.isComposing) {
+        sendMessageToMicroCMS({ data: editorRef.current.innerText });
       }
 
-      sendMessageToMicroCMS({ data: editorRef.current.innerText });
-
-      // 補完が有効なときに、通常の文字入力（削除やペースト以外）は、以降の補完処理をトリガーする
-      if (
-        enabled &&
-        (e.inputType === "insertText" ||
-          e.inputType === "insertCompositionText")
-      ) {
+      // 補完が有効なときに、IMEの変換中、削除やペースト以外のイベントでは、補完処理をトリガーする
+      if (enabled && e.inputType === "insertText") {
         triggerCompletionByInputEvent();
       } else {
         resetDebounceTimeout();
