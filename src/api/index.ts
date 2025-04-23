@@ -1,10 +1,5 @@
 import { Hono } from "hono";
-import {
-  extractLines,
-  isEmptyContent,
-  isString,
-  isTooShortForCompletion,
-} from "../shared/string";
+import { extractLines, isString, shouldComplete } from "../shared/string";
 import { isTextGenerationKind } from "../shared/text-generation";
 import { textGenerationFactory } from "./text-generation";
 
@@ -27,11 +22,7 @@ route.post("/completion/:kind", async (c) => {
 
   const normalizedInput = extractLines(input);
 
-  // 整形後の文字列が空、または補完のトリガーとしては短すぎると判断した場合は、空文字を返して終了
-  if (
-    isEmptyContent(normalizedInput) ||
-    isTooShortForCompletion(normalizedInput)
-  ) {
+  if (!shouldComplete(normalizedInput)) {
     return c.json({ completion: "" });
   }
 

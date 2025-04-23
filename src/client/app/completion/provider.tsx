@@ -1,10 +1,6 @@
 import type { FC, PropsWithChildren } from "hono/jsx";
 import { createContext, useCallback, useContext, useState } from "hono/jsx";
-import {
-  extractLines,
-  isEmptyContent,
-  isTooShortForCompletion,
-} from "../../../shared/string";
+import { extractLines, shouldComplete } from "../../../shared/string";
 import { TextGenerationKind } from "../../../shared/text-generation";
 import { isAbortRequestError } from "./errors";
 import {
@@ -74,8 +70,7 @@ const CompletionProvider: FC<PropsWithChildren> = ({ children }) => {
 
       const reqText = extractLines(rawInput).trim();
 
-      // 文字数が空と判定されたとき、または補完のトリガーとしてはテキストが短すぎると判断した時はスキップ
-      if (isEmptyContent(reqText) || isTooShortForCompletion(reqText)) {
+      if (!shouldComplete(reqText)) {
         return null;
       }
 

@@ -6,10 +6,16 @@ const isString = (content: unknown): content is string => {
 };
 
 /**
+ * 文字列が空、または空白のみで構成されている場合はtrueを返す正規表現
+ * 例: " ", "\t", "\n", "\r\n" など
+ */
+const regexpBlankOnly = /^\s*$/;
+
+/**
  * 文字列が空、または空白のみで構成されている場合はtrueを返す
  */
 const isEmptyContent = (content: string): boolean => {
-  return /^\s*$/.test(content);
+  return regexpBlankOnly.test(content);
 };
 
 /**
@@ -35,4 +41,24 @@ const extractLines = (content: string, numLines = 1): string => {
     .join("\n");
 };
 
-export { isEmptyContent, isString, isTooShortForCompletion, extractLines };
+/**
+ * 文字列の末尾に、句点や感嘆符などの終止符があるかを判定する
+ */
+const regexpPeriod = /[。．.！？!?]$/;
+
+/**
+ * 補完を行うべきかを判定する
+ * 1. 空文字列でないこと
+ * 2. 補完のトリガーとしては短すぎないこと
+ * 3. 末尾に句点や感嘆符などの終止符がないこと
+ * 以上の条件を満たす場合はtrueを返す
+ */
+const shouldComplete = (content: string) => {
+  return !(
+    isEmptyContent(content) ||
+    isTooShortForCompletion(content) ||
+    regexpPeriod.test(content)
+  );
+};
+
+export { isEmptyContent, isString, extractLines, shouldComplete };
