@@ -246,6 +246,10 @@ const Editor: FC<Props> = ({ defaultValue, sendMessageToMicroCMS }) => {
         }
 
         sendMessageToMicroCMS({ data: editorRef.current.innerText });
+      } else if (e.key === "Escape") {
+        // Escapeキーを押したら、ゴーストテキストを削除する
+        e.preventDefault();
+        removeCompletionText();
       }
     },
     [sendMessageToMicroCMS, getCurrentCaretInfo, removeCompletionText],
