@@ -155,7 +155,7 @@ const Editor: FC<Props> = ({ defaultValue, sendMessageToMicroCMS }) => {
   }, [getCurrentCaretInfo, resetAbortController, resetDebounceTimeout]);
 
   const handleInput = useCallback(
-    async (e: InputEvent) => {
+    (e: InputEvent) => {
       if (!editorRef.current) {
         return;
       }
